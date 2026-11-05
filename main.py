@@ -5,6 +5,10 @@ import os
 
 comm = {}
 
+def clear_screen():
+    # Use 'cls' on Windows, 'clear' on Linux/macOS
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 def main_menu():
     option = input(f"Welcome to the Main Menu!\nplease select your option:\n{main_menu_data.data}\n> ")
     if option == "settings mode":
@@ -60,5 +64,5 @@ if __name__ == "__main__":
     while True:
         # main logic goes here.
         if comm.get("clear_previous_lines", False):
-            os.system("cls")
+            clear_screen()
         main_menu()
