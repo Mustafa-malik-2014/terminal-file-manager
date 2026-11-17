@@ -1,18 +1,16 @@
-from data import *
+import data
+import shelve
 import os
 # run command:
 # py main.py
-
-comm = {"show_file_extensions": False,
-    "clear_previous_lines": False,
-    "username": None,
-    "wants_tutorial": "n/a"}
+comm = []
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def main_menu():
-    option = input(f"Welcome to the Main Menu!\nplease select your option:\n{main_menu_data.data}\n> ")
+    with shelve.open('database') as db:comm.append(db.get('main_menu', []))
+    option = input(f"Welcome to the Main Menu!\nplease select your option:\n{comm[0]}\n> ")
     if option == "settings mode":
         settings()
     elif option == "view mode":
@@ -21,8 +19,6 @@ def main_menu():
         create()
 
 def settings():
-    if comm.get("clear_previous_lines"):
-        clear_screen()
     if username_data.data is None:
         print("you haven't set up your settings yet, please set them up first.")
         username_input = input("let's start with your account please fill the following:\nusername (rules : use only Letters,numbers and symbols) ")
@@ -72,6 +68,4 @@ def create():
 if __name__ == "__main__":
     while True:
         # main logic goes here.
-        if comm.get("clear_previous_lines", False):
-            clear_screen()
         main_menu()
