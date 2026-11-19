@@ -8,4 +8,3 @@ with shelve.open("database") as db:
     db["settings"] = {"username": None,
                       "show file extensions": None,
                       "clear previous lines": None}
-    print("DEBUG KEYS:", list(db.keys()))
